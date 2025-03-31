@@ -1,0 +1,25 @@
+body.dark-mode {
+    background-color: rgba(9, 8, 8, 0.74);
+    color: rgba(255, 255, 255, 0.82);
+}
+
+body.dark-mode a {
+    color: rgba(0, 0, 0, 0.82);
+}
+button{
+    background-color: #b494ea;
+    border: none;
+    border-radius: 12px; 
+}
+/* Animation für das Zittern */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-20px); }
+    50% { transform: translateX(20px); }
+    75% { transform: translateX(-20px); }
+    100% { transform: translateX(0); }
+}
+button:hover{
+    animation: shake 0.5s ease-in-out; /* 0.5s für die Dauer des Zitterns */
+    animation-iteration-count: infinite; /* Damit das Zittern immer wiederholt wird */
+}
