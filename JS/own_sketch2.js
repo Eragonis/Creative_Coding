@@ -1,6 +1,7 @@
 function own_sketch2(p) {
     p.setup = function () {
-        p.createCanvas(p.windowWidth, p.windowHeight);
+        // p.createCanvas(p.windowWidth, p.windowHeight);
+        p.createCanvas(400, 400);
         p.background(0);
     };
     p.draw = function () {
