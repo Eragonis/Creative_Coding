@@ -32,14 +32,14 @@ function sketch_image(p) {
             let blueIm2 = anotherImage.pixels[i + 6];
             let alphaIm2 = anotherImage.pixels[i + 7];
             
-           p.pixels[i + 0] = redIm1;
+           p.pixels[i + 0] = 180;
            p.pixels[i + 1] = greenIm1;
-           p.pixels[i + 2] = blueIm1;
+           p.pixels[i + 2] = 324;
            p.pixels[i + 3] = alphaIm1;
 
-           p.pixels[i + 4] = redIm2;
+           p.pixels[i + 4] = 180;
            p.pixels[i + 5] = greenIm2;
-           p.pixels[i + 6] = blueIm2;
+           p.pixels[i + 6] = 324;
            p.pixels[i + 7] = alphaIm2;
         }
 
