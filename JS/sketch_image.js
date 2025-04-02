@@ -10,14 +10,14 @@ function sketch_image(p) {
     }
 
     p.setup = function () {
-        p.createCanvas(500, 700);
+        p.createCanvas(500, 674);
         p.pixelDensity(1);
     }
 
     p.draw = function() {
         p.background(71);
-        // p.image(img, 0, 0, 500, 700);
-        // p.image(anotherImage, 0, 0, 500, 700);
+        // p.image(img, 0, 0, 500, 674);
+        // p.image(anotherImage, 0, 0, 500, 674);
         p.loadPixels();
         img.loadPixels();
         anotherImage.loadPixels();
