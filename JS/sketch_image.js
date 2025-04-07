@@ -13,7 +13,7 @@ function sketch_image(p) {
         p.createCanvas(500, 674);
         p.pixelDensity(1);
     }
-
+    
     p.draw = function() {
         p.background(71);
         // p.image(img, 0, 0, 500, 674);
@@ -36,15 +36,15 @@ function sketch_image(p) {
            p.pixels[i + 1] = greenIm1;
            p.pixels[i + 2] = 324;
            p.pixels[i + 3] = alphaIm1;
-
+    
            p.pixels[i + 4] = 180;
            p.pixels[i + 5] = greenIm2;
            p.pixels[i + 6] = 324;
            p.pixels[i + 7] = alphaIm2;
         }
-
+    
         // img.updatePixels();
-
+    
         // anotherImage.updatePixels();
         p.updatePixels();
     }
