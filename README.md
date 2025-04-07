@@ -99,3 +99,39 @@ function sketch_image(p) {
 
 new p5(sketch_image);
 ```
+
+## test user settings Json
+
+```
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "telemetry.telemetryLevel": "off",
+  "extensions.autoCheckUpdates": false,
+  "extensions.autoUpdate": false,
+  "update.mode": "none",
+  "update.showReleaseNotes": false,
+  "git.optimisticUpdate": false,
+  "doki.statusbar.name": "夜刀神 十香",
+  "files.autoSave": "onFocusChange",
+  "workbench.tree.indent": 15,
+  "workbench.colorCustomizations": {
+    "tree.indentGuidesStroke": "#b494ea"
+  },
+  "editor.cursorBlinking": "smooth",
+  "terminal.integrated.cursorStyle": "line",
+  "editor.rulers": [80],
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "explorer.autoReveal": "focusNoScroll",
+  "editor.stickyScroll.enabled": false,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  }
+}
+```
