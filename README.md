@@ -1,9 +1,14 @@
 # Creative_Coding
+
+<!-- prettier-ignore -->
 |who     |what		 |when	    |
 |--------|---------------|----------|
 |Eragonis|Creative Coding|2025.31.03|
+
 ---
+
 ## Image nice collor
+
 ```
 function sketch_image(p) {
     p.preload = function() {
@@ -36,7 +41,9 @@ function sketch_image(p) {
 
 new p5(sketch_image);
 ```
+
 - anotherone
+
 ```
 let img;
 let anotherImage;
@@ -66,12 +73,12 @@ function sketch_image(p) {
             let greenIm1 = img.pixels[i + 1];
             let blueIm1 = img.pixels[i + 2];
             let alphaIm1 = img.pixels[i + 3];
-            
+
             let redIm2 = anotherImage.pixels[i + 4];
             let greenIm2 = anotherImage.pixels[i + 5];
             let blueIm2 = anotherImage.pixels[i + 6];
             let alphaIm2 = anotherImage.pixels[i + 7];
-            
+
            p.pixels[i + 0] = 180;
            p.pixels[i + 1] = greenIm1;
            p.pixels[i + 2] = 324;
