@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creative Coding</title>
-
     <link rel="stylesheet" href="../CSS/stylesheet.css">
-
     <script src="../libraries/p5.min.js"></script>
     <script src="../libraries/p5.sound.min.js"></script>
 </head>
-<body>
-    <header>
-        <button id="darkModeToggle"><strong>Dark Mode</strong></button> <br>
-        <a href="own.index.html"><img src="https://i.scdn.co/image/ab67616d00001e02d960c4babc90b3129d277ef8" alt="Guts" height="50" width="50"></a>
-        <a href="image_sketch.html"><img src="https://i.pinimg.com/236x/b6/64/2d/b6642de3ecb4c4c9c754336ce91889b7.jpg" alt="image" height="50" width="50"></a>
-    </header>
 
-    <!--<script src="../JS/sketch1.js"></script>-->
+<body>
+    <div class="container">
+        <button id="darkModeToggle"><strong>Dark Mode</strong></button> <br>
+        <h1>Welcome</h1>
+        <div class="links">
+            <a href="#" data-url="own.index.html">Own</a>
+            <a href="#" data-url="image_sketch.html">Image</a>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p>Möchten Sie diese Seite betreten?</p>
+            <button id="yesButton">Ja</button>
+            <button id="noButton">Nein</button>
+        </div>
+    </div>
+
     <script src="../JS/sketch2.js"></script>
     <script src="../JS/sketch3.js"></script>
     <script src="../JS/main.js"></script>
 </body>
+
 </html>
