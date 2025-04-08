@@ -9,7 +9,8 @@ function sketch_glitch(p) {
   p.setup = function () {
     p.createCanvas(850, 680);
     p.pixelDensity(1);
-
+    // p.image(imgGlitch, 0,0);
+    // glitch();
     p.loadPixels();
     imgGlitch.loadPixels();
     for (let i = 0; i < imgGlitch.pixels.length; i += 4) {
@@ -27,12 +28,20 @@ function sketch_glitch(p) {
     imgGlitch.updatePixels();
     p.updatePixels();
   };
-  // TODO Glizch function create
-  function glitch(p) {
-    p.background(255);
-    for (let y = p.height / 2; y < p.height / 2 + 50; y += size) {
-      for (let x = p.width / 2; x < p.width / 2 + 125; x += size) {
-        const index = (x + y * width) * 4;
+  // TODO Glitch function create
+  function glitch() {
+    imgGlitch.loadPixels();
+    p.loadPixels();
+
+    for (let y = p.height / 2; y < p.height / 2 + 50; y++) {
+      for (let x = p.width / 2; x < p.width / 2 + 125; x++) {
+        const index = (x + y * p.width) * 4;
+
+        p.pixels[index + 0] = imgGlitch.pixels[index + 0];
+        p.pixels[index + 1] = imgGlitch.pixels[index + 1];
+        p.pixels[index + 2] = imgGlitch.pixels[index + 2];
+        p.pixels[index + 3] = imgGlitch.pixels[index + 3];
+
         p.pixels[index + 0] = 0;
         p.pixels[index + 1] = 0;
         p.pixels[index + 2] = 0;
@@ -40,8 +49,9 @@ function sketch_glitch(p) {
     }
     p.updatePixels();
   }
-  p.mousePressed = function (p) {
-    glitch(p);
+
+  p.mousePressed = function () {
+    glitch();
   };
 }
 
