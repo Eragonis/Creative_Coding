@@ -17,6 +17,7 @@ function sketch_image(p) {
     p.background(71);
     // p.image(img, 0, 0, 500, 674);
     // p.image(anotherImage, 0, 0, 500, 674);
+
     p.loadPixels();
     img.loadPixels();
     anotherImage.loadPixels();
