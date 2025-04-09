@@ -1,4 +1,4 @@
-function sketch(p) {
+function shape(p) {
   const amountOfFormPoints = 5;
   const stepSize = 2;
   const initRadius = 150;
@@ -56,4 +56,4 @@ function sketch(p) {
   };
 }
 
-new p5(sketch);
+new p5(shape);
