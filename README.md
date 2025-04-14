@@ -114,7 +114,6 @@ new p5(sketch_image);
   "update.showReleaseNotes": false,
   "git.optimisticUpdate": false,
   "doki.statusbar.name": "夜刀神 十香",
-  "files.autoSave": "onFocusChange",
   "workbench.tree.indent": 15,
   "workbench.colorCustomizations": {
     "tree.indentGuidesStroke": "#b494ea"
@@ -132,6 +131,20 @@ new p5(sketch_image);
     "plaintext": false,
     "markdown": false,
     "scminput": false
+  },
+  "files.autoSave": "afterDelay",
+
+  // changing the comment color
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": ["comment.line.double-slash.js"],
+        "settings": {
+          "foreground": "#b494ea"
+        }
+      }
+    ]
   }
 }
+
 ```
