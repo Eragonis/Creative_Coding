@@ -7,6 +7,8 @@ let green;
 let blue;
 let alpha;
 
+const temp = [];
+
 function sketch_glitch(p) {
   p.preload = function () {
     imgGlitch = p.loadImage("../Image/Esdeath.png");
@@ -20,10 +22,10 @@ function sketch_glitch(p) {
     p.loadPixels();
     imgGlitch.loadPixels();
     for (let i = 0; i < imgGlitch.pixels.length; i += 4) {
-       red = imgGlitch.pixels[i + 0];
-       green = imgGlitch.pixels[i + 1];
-       blue = imgGlitch.pixels[i + 2];
-       alpha = imgGlitch.pixels[i + 3];
+      red = imgGlitch.pixels[i + 0];
+      green = imgGlitch.pixels[i + 1];
+      blue = imgGlitch.pixels[i + 2];
+      alpha = imgGlitch.pixels[i + 3];
 
       p.pixels[i + 0] = red;
       p.pixels[i + 1] = green;
@@ -61,10 +63,10 @@ function sketch_glitch(p) {
           p.pixels[index + 2] = imgGlitch.pixels[index + 2];
           p.pixels[index + 3] = imgGlitch.pixels[index + 3];
 
-          p.pixels[index + 0] = 180;
-          p.pixels[index + 1] = 0;
-          p.pixels[index + 2] = 324;
-          p.pixels[index + 3] = 50;
+          temp[index] = p.pixels[index + 0] = red;
+          temp[index] = p.pixels[index + 1] = green;
+          temp[index] = p.pixels[index + 2] = blue;
+          temp[index] = p.pixels[index + 3] = alpha;
         }
       }
 
@@ -77,10 +79,10 @@ function sketch_glitch(p) {
           p.pixels[index + 2] = imgGlitch.pixels[index + 2];
           p.pixels[index + 3] = imgGlitch.pixels[index + 3];
 
-          p.pixels[index + 0] = 180;
-          p.pixels[index + 1] = 0;
-          p.pixels[index + 2] = 324;
-          p.pixels[index + 3] = 50;
+          p.pixels[index + 0] = temp[index];
+          p.pixels[index + 1] = temp[index];
+          p.pixels[index + 2] = temp[index];
+          p.pixels[index + 3] = temp[index];
         }
       }
 
@@ -109,10 +111,10 @@ function sketch_glitch(p) {
           p.pixels[index + 2] = imgGlitch.pixels[index + 2];
           p.pixels[index + 3] = imgGlitch.pixels[index + 3];
 
-          p.pixels[index + 0] = red;
-          p.pixels[index + 1] = green;
-          p.pixels[index + 2] = blue;
-          p.pixels[index + 3] = alpha;
+          p.pixels[index + 0] = 180;
+          p.pixels[index + 1] = 0;
+          p.pixels[index + 2] = 324;
+          p.pixels[index + 3] = 50;
         }
       }
 
