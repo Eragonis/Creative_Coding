@@ -32,10 +32,10 @@ button {
   }
 }
 
-button:hover {
+/*button:hover {
   animation: shake 0.5s ease-in-out; /* 0.5s für die Dauer des Zitterns */
-  animation-iteration-count: infinite; /* Damit das Zittern immer wiederholt wird */
-}
+ /* animation-iteration-count: infinite; /* Damit das Zittern immer wiederholt wird */
+/*} */
 
 body {
   background-color: #1a1a1a;
@@ -95,4 +95,11 @@ button {
 
 button:hover {
   background-color: #555;
+}
+
+.text {
+  margin-left: 10px;
+  width: 12cm;
+  word-wrap: break-word;
+  white-space: normal;
 }

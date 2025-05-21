@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creative Coding</title>
-    <link rel="stylesheet" href="../CSS/stylesheet.css" />
-    <script src="../libraries/p5.min.js"></script>
-    <script src="../libraries/p5.sound.min.js"></script>
-  </head>
 
-  <body>
-    <div class="container">
-      <button id="darkModeToggle"><strong>Dark Mode</strong></button> <br />
-      <h1>shakespeare</h1>
-      <p>Dies ist der Inhalt der shakespeare.</p>
-      <a href="index.html"
-        ><img
-          src="https://raw.githubusercontent.com/Eragonis/JS_Project_EMVs_New/refs/heads/main/Image/Home/home.png"
-          alt="home"
-          width="50"
-          height="50"
-      /></a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Coding</title>
+  <link rel="stylesheet" href="../CSS/stylesheet.css" />
+  <script src="../libraries/p5.min.js"></script>
+  <script src="../libraries/p5.sound.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <button id="darkModeToggle"><strong>Dark Mode</strong></button> <br />
+    <h1>shakespeare</h1>
+    <p>Dies ist der Inhalt der shakespeare.</p>
+    <div class="links">
+      <a href="#" data-url="shakespear.html">Shakesprear</a>
     </div>
+    <a href="index.html"><img
+        src="https://raw.githubusercontent.com/Eragonis/JS_Project_EMVs_New/refs/heads/main/Image/Home/home.png"
+        alt="home" width="50" height="50" /></a>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p>Möchten Sie diese Seite betreten?</p>
+      <button id="yesButton">Ja</button>
+      <button id="noButton">Nein</button>
+    </div>
+  </div>
+  <div class="text">
+    <p>Bei dieser seite handelt es ich um eine übergans seite, da es bei den eizelnen sketch zu komplikationen
+      kommen kann. Links hat es einen link für die
+      <i><b>Shakesprear</b></i> seite.
+    </p>
+  </div>
 
-    <script src="../JS/main.js"></script>
-    <script src="../JS/shakespeare.js"></script>
-  </body>
+  <script src="../JS/main.js"></script>
+</body>
+
 </html>

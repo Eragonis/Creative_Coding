@@ -7,7 +7,7 @@ let nextCells = [];
 function game_of_life(p) {
   p.setup = function () {
     p.frameRate(10);
-    p.createCanvas(800, 800);
+    p.createCanvas(750, 750);
 
     // * Calculate collums and rows
     columnCount = p.floor(p.width / cellSize);

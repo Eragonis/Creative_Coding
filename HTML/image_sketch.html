@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creative Coding</title>
-    <link rel="stylesheet" href="../CSS/stylesheet.css" />
-    <script src="../libraries/p5.min.js"></script>
-    <script src="../libraries/p5.sound.min.js"></script>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Coding</title>
+  <link rel="stylesheet" href="../CSS/stylesheet.css" />
+  <script src="../libraries/p5.min.js"></script>
+  <script src="../libraries/p5.sound.min.js"></script>
+</head>
 
-    <div class="container">
-      <button id="darkModeToggle"><strong>Dark Mode</strong></button> <br />
-      <h1>Image Sketch Page</h1>
-      <p>Dies ist der Inhalt der Image Sketch-Seite.</p>
-      <a href="index.html"
-        ><img
-          src="https://raw.githubusercontent.com/Eragonis/JS_Project_EMVs_New/refs/heads/main/Image/Home/home.png"
-          alt="home"
-          width="50"
-          height="50"
-      /></a>
+<body>
+
+  <div class="container">
+    <button id="darkModeToggle"><strong>Dark Mode</strong></button> <br />
+    <h1>Image Sketch Page</h1>
+    <p>Dies ist der Inhalt der Image Sketch-Seite.</p>
+    <div class="links">
+      <a href="#" data-url="glitch.html">Glitch</a>
+      <a href="#" data-url="pixel_image.html">Pixel Image</a>
     </div>
-    <script src="../JS/main.js"></script>
-    <script src="../JS/sketch_glitch.js"></script>
-    <!-- <script src="../JS/sketch_image.js"></script> -->
-  </body>
+    <a href="index.html"><img
+        src="https://raw.githubusercontent.com/Eragonis/JS_Project_EMVs_New/refs/heads/main/Image/Home/home.png"
+        alt="home" width="50" height="50" /></a>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p>Möchten Sie diese Seite betreten?</p>
+      <button id="yesButton">Ja</button>
+      <button id="noButton">Nein</button>
+    </div>
+  </div>
+  <div class="text">
+    <p>Bei dieser seite handelt es ich um eine übergans seite, da es bei den eizelnen sketch zu komplikationen
+      kommen kann. Links hat es einen link für die
+      <i><b>Glitch</b></i> seite und eine für die <i><b>Pixel Image</b></i>seite.
+    </p>
+  </div>
+
+  <script src="../JS/main.js"></script>
+</body>
+
 </html>
