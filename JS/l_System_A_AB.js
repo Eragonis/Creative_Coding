@@ -1,68 +1,82 @@
 let axiom = "F";
 let currentString = axiom;
-let len = 5;  // Längere Linien
-let ang = 22.5;  // Winkel
-let generations = 5;  // Anzahl der Iterationen
+let len = 8;
+let ang = 45;
+let generations = 5;
 
 const rule = {
-  F: "FF+[+F-F-F]-[-F+F+F]",
+  F: "F[+F][-F]",
 };
 
 function l_system(p) {
   p.setup = function () {
-    p.createCanvas(450, 450);
-    p.background(255);
+    p.createCanvas(500, 500);
     p.angleMode(p.DEGREES);
-    p.translate(p.width / 2, p.height);  // Startposition in der Mitte
-    generate();  // L-System generieren
-    drawLSystem();  // L-System zeichnen
+    p.background(255);
+    generate();
+    drawEachGeneration();
   };
 
   p.draw = function () {
-    p.noLoop();  // Nur einmal zeichnen
+    p.noLoop();
   };
 
   p.mousePressed = function () {
-    generate();  // Neue Generation erzeugen
-    p.redraw();  // Canvas neu zeichnen
+    generate();
+    p.redraw();
   };
 
   function generate() {
-    currentString = axiom;  // Starte mit dem Axiom
+    currentString = axiom;
+    stringsByGen = [axiom];
+
     for (let i = 0; i < generations; i++) {
       let nextString = "";
-      for (let j = 0; j < currentString.length; j++) {
-        let currentChar = currentString.charAt(j);
+      let current = stringsByGen[i];
+
+      for (let j = 0; j < current.length; j++) {
+        let currentChar = current.charAt(j);
         if (rule[currentChar]) {
-          nextString += rule[currentChar];  // Ersetze mit der Regel
+          nextString += rule[currentChar];
         } else {
-          nextString += currentChar;  // Wenn keine Regel existiert, behalte das Zeichen
+          nextString += currentChar;
         }
       }
-      currentString = nextString;  // Setze die neue Zeichenkette
+
+      stringsByGen.push(nextString);
     }
   }
 
-  function drawLSystem() {
+  function drawEachGeneration() {
+    p.background(255);
+    for (let i = 0; i <= generations; i++) {
+      p.push();
+      p.translate(p.width / 2, 50 + i * 80); // Jede Generation wandert weiter nach unten
+      drawLSystem(stringsByGen[i]);
+      p.pop();
+    }
+  }
+
+  function drawLSystem(instruction) {
     p.stroke(0);
-    p.beginShape();
-    for (let i = 0; i < currentString.length; i++) {
-      let currentChar = currentString.charAt(i);
+    for (let i = 0; i < instruction.length; i++) {
+      let currentChar = instruction.charAt(i);
       if (currentChar === "F") {
-        p.line(0, 0, 0, -len);  // Zeichne Linie
-        p.translate(0, -len);  // Verschiebe die "Turtle"-Position
+        p.line(0, 0, 0, len);
+        p.translate(0, len);
       } else if (currentChar === "+") {
-        p.rotate(ang);  // Drehung nach rechts
+        p.rotate(ang);
       } else if (currentChar === "-") {
-        p.rotate(-ang);  // Drehung nach links
+        p.rotate(-ang);
       } else if (currentChar === "[") {
-        p.push();  // Speicher die aktuelle Position und Ausrichtung
+        p.push();
       } else if (currentChar === "]") {
-        p.pop();  // Wiederherstellen der letzten Position und Ausrichtung
+        p.pop();
       }
     }
-    p.endShape();
   }
+
+  let stringsByGen = [];
 }
 
 new p5(l_system);
