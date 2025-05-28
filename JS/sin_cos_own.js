@@ -1,34 +1,38 @@
 function sketch_sin_cos(p) {
-  let circleX = 200;
-  let circleY = 150;
-  let circleRadius = 75;
+  // Circle parameters for the main unit circle
+  let circleX = 200; // X position of the circle center
+  let circleY = 150; // Y position of the circle center
+  let circleRadius = 75; // Radius of the circle
 
-  let graphX = 50;
-  let graphY = 300;
-  let graphAmplitude = 50;
-  let graphPeriod = 300;
+  // Parameters for the sine/cosine graph below the circle
+  let graphX = 50; // X position of graph origin (left)
+  let graphY = 300; // Y position of graph origin (middle line)
+  let graphAmplitude = 50; // Amplitude (height) of sine and cosine waves
+  let graphPeriod = 300; // Length (width) of one full period in pixels
 
-  // Position oben rechts, nach links verschoben
+  // Position for displaying values (top-right corner, shifted left)
   let startX = 260;
   let startY = 40;
   let lineHeight = 20;
 
   p.setup = function () {
     p.createCanvas(400, 400);
-    p.angleMode(p.DEGREES);
+    p.angleMode(p.DEGREES); // Use degrees instead of radians for angles
   };
 
   p.draw = function () {
     p.background(0);
 
+    // Current angle in degrees, cycling from 0 to 359 based on frame count
     let angle = p.frameCount % 360;
 
+    // Display the current angle value
     p.fill(255);
     p.textSize(20);
     p.textAlign(p.LEFT, p.CENTER);
     p.text(`angle: ${angle}`, 25, 25);
 
-    // Kreis & Achsen
+    // Draw the unit circle and its axes (horizontal and vertical)
     p.noFill();
     p.stroke(128);
     p.strokeWeight(3);
@@ -36,36 +40,36 @@ function sketch_sin_cos(p) {
     p.line(circleX, circleY - circleRadius, circleX, circleY + circleRadius);
     p.line(circleX - circleRadius, circleY, circleX + circleRadius, circleY);
 
-    // Punkte auf Kreis berechnen
-    let cosX = circleX + circleRadius * p.cos(angle);
-    let sinY = circleY - circleRadius * p.sin(angle);
-    let sinX = cosX; // für das Dreieck
+    // Calculate positions of points on the circle for cosine and sine
+    let cosX = circleX + circleRadius * p.cos(angle); // X of point on circle using cosine
+    let sinY = circleY - circleRadius * p.sin(angle); // Y of point on circle using sine (inverted Y axis)
+    let sinX = cosX; // For drawing the triangle
 
-    // Linien vom Mittelpunkt zum Punkt (P), und von Cosinus-Projektion zum Punkt (P)
+    // Draw lines from center (M) to point P, and from cosine projection (C) to P
     p.stroke("#b494ea");
     p.strokeWeight(2);
-    p.line(circleX, circleY, cosX, sinY); // Mittelpunkt zu Punkt P
-    p.line(cosX, circleY, cosX, sinY); // Cosinus zu Punkt P
+    p.line(circleX, circleY, cosX, sinY); // Line M to P
+    p.line(cosX, circleY, cosX, sinY); // Line C to P
 
     p.noStroke();
 
-    // Mittelpunkt M (weiß)
+    // Draw the center point M (white)
     p.fill("white");
     p.circle(circleX, circleY, 10);
 
-    // Cosinus-Projektion C (orange)
+    // Draw cosine projection point C (orange)
     p.fill("orange");
     p.circle(cosX, circleY, 10);
 
-    // Sinus-Punkt im Kreis (grün)
+    // Draw sine point on circle (red)
     p.fill("red");
     p.circle(circleX, sinY, 10);
 
-    // Punkt auf Kreis P (lila, Dreieckspunkt)
+    // Draw point P on the circle (lime)
     p.fill("lime");
     p.circle(cosX, sinY, 10);
 
-    // Dreiecksfläche berechnen (M, C, P)
+    // Calculate the area of the triangle formed by points M, C, P using the shoelace formula
     let area = Math.abs(
       (circleX * (circleY - sinY) +
         cosX * (sinY - circleY) +
@@ -73,7 +77,11 @@ function sketch_sin_cos(p) {
         2
     );
 
-    // Dreieck zeichnen
+    // Convert area from pixels squared to square centimeters (assuming 37.8 pixels per cm at 96 DPI)
+    let pixelsPerCm = 37.8;
+    let areaInCm2 = area / (pixelsPerCm * pixelsPerCm);
+
+    // Draw the triangle (M, C, P) with semi-transparent fill
     p.stroke("#b494ea");
     p.strokeWeight(2);
     p.fill("#b494ea55");
@@ -83,7 +91,7 @@ function sketch_sin_cos(p) {
     p.vertex(cosX, sinY);
     p.endShape(p.CLOSE);
 
-    // Oben rechts: M, C, P, A untereinander mit Positionen ohne Outline, nur Farbe
+    // Display coordinates and area values in the top-right corner
     p.stroke(0);
     p.textSize(14);
     p.textAlign(p.LEFT, p.CENTER);
@@ -91,33 +99,44 @@ function sketch_sin_cos(p) {
     p.fill("white");
     p.text(
       `M: (${circleX.toFixed(1)}, ${circleY.toFixed(1)})`,
-      startX + 15,
+      startX + 20,
       startY
     );
 
     p.fill("orange");
     p.text(
       `C: (${cosX.toFixed(1)}, ${circleY.toFixed(1)})`,
-      startX + 15,
+      startX + 20,
       startY + lineHeight
     );
 
     p.fill("lime");
     p.text(
-      `P: (${circleX.toFixed(1)}, ${sinY.toFixed(1)})`,
-      startX + 15,
+      `P: (${cosX.toFixed(1)}, ${sinY.toFixed(1)})`,
+      startX + 20,
       startY + 2 * lineHeight
     );
 
     p.fill("#b494ea");
-    p.text(`A: ${area.toFixed(2)}`, startX + 15, startY + 3 * lineHeight);
+    p.text(`A: ${area.toFixed(2)} px²`, startX + 20, startY + 3 * lineHeight);
+    p.text(
+      `A: ${areaInCm2.toFixed(4)} cm²`,
+      startX + 20,
+      startY + 4 * lineHeight
+    );
 
-    // --- Sinus / Cosinus Graph ---
+    // --- Draw sine and cosine graph below the circle ---
 
     p.stroke("grey");
     p.strokeWeight(3);
+
+    // Draw x-axis of graph
     p.line(graphX, graphY, graphX + 300, graphY);
+
+    // Draw y-axis (amplitude lines)
     p.line(graphX, graphY - graphAmplitude, graphX, graphY + graphAmplitude);
+
+    // Draw vertical line for one full period (360 degrees)
     p.line(
       graphX + graphPeriod,
       graphY - graphAmplitude,
@@ -125,6 +144,7 @@ function sketch_sin_cos(p) {
       graphY + graphAmplitude
     );
 
+    // Draw axis labels
     p.fill("grey");
     p.strokeWeight(1);
     p.textAlign(p.CENTER, p.CENTER);
@@ -134,12 +154,14 @@ function sketch_sin_cos(p) {
     p.text("0", graphX / 2, graphY);
     p.text("-1", graphX / 2, graphY + graphAmplitude);
 
+    // Labels for cosine and sine curves
     p.fill("orange");
     p.text("cos", graphX + graphPeriod + graphX / 2, graphY - graphAmplitude);
+
     p.fill("red");
     p.text("sin", graphX + graphPeriod + graphX / 2, graphY);
 
-    // Cosinus-Kurve
+    // Draw the cosine curve
     p.noFill();
     p.stroke("orange");
     p.beginShape();
@@ -150,7 +172,7 @@ function sketch_sin_cos(p) {
     }
     p.endShape();
 
-    // Sinus-Kurve (rot)
+    // Draw the sine curve
     p.noFill();
     p.stroke("red");
     p.beginShape();
@@ -161,12 +183,12 @@ function sketch_sin_cos(p) {
     }
     p.endShape();
 
-    // bewegliche Linie auf dem Graphen
+    // Draw moving vertical line that corresponds to the current angle on the graph
     let lineX = p.map(angle, 0, 360, graphX, graphX + graphPeriod);
     p.stroke("grey");
     p.line(lineX, graphY - graphAmplitude, lineX, graphY + graphAmplitude);
 
-    // Punkte auf dem Graphen
+    // Draw circles on the sine and cosine curves at the current angle position
     let orangeY = graphY - graphAmplitude * p.cos(angle);
     let redY = graphY - graphAmplitude * p.sin(angle);
 

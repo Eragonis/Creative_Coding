@@ -1,3 +1,17 @@
+.text-link {
+  color: inherit;
+  /* übernimmt die Textfarbe vom Umfeld */
+  text-decoration: none;
+  /* entfernt den Unterstrich */
+  cursor: pointer;
+  /* zeigt Hand-Cursor beim Hover */
+}
+
+.text-link:hover {
+  text-decoration: underline;
+  /* optional: unterstreichen beim Hover */
+}
+
 body.dark-mode {
   background-color: rgba(9, 8, 8, 0.74);
   color: rgba(255, 255, 255, 0.82);
@@ -18,15 +32,19 @@ button {
   0% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-20px);
   }
+
   50% {
     transform: translateX(20px);
   }
+
   75% {
     transform: translateX(-20px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -34,7 +52,7 @@ button {
 
 /*button:hover {
   animation: shake 0.5s ease-in-out; /* 0.5s für die Dauer des Zitterns */
- /* animation-iteration-count: infinite; /* Damit das Zittern immer wiederholt wird */
+/* animation-iteration-count: infinite; /* Damit das Zittern immer wiederholt wird */
 /*} */
 
 body {

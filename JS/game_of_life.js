@@ -9,18 +9,18 @@ function game_of_life(p) {
     p.frameRate(10);
     p.createCanvas(750, 750);
 
-    // * Calculate collums and rows
+    // * Calculate columns and rows
     columnCount = p.floor(p.width / cellSize);
     rowCount = p.floor(p.height / cellSize);
 
-    //? set eacj colum in  current cells to an empty array
+    //? Set each column in currentCells to an empty array
     //? This allows cells to be added to this array
-    //? This index of cell will be its row number
+    //? The index of the cell will be its row number
     for (let column = 0; column < columnCount; column++) {
       currentCells[column] = [];
     }
 
-    //* Repeat the same process fpr the next cells
+    //* Repeat the same process for nextCells
     for (let column = 0; column < columnCount; column++) {
       nextCells[column] = [];
     }
@@ -45,40 +45,42 @@ function game_of_life(p) {
       }
     }
   };
-  //* Reset board whennmouse is pressed
+
+  //* Reset board when mouse is pressed
   p.mousePressed = function () {
     randomizeBoard();
     p.loop();
   };
+
   //* Fill board randomly
   function randomizeBoard() {
     for (let column = 0; column < columnCount; column++) {
       for (let row = 0; row < rowCount; row++) {
-        //* Randomly sellect value of either o (dead) or 1 (alive)
+        //* Randomly select value of either 0 (dead) or 1 (alive)
         currentCells[column][row] = p.random([0, 1]);
       }
     }
   }
 
-  //* Create a new generaton
+  //* Create a new generation
   function generate() {
     //* Loop through every spot in our 2D array and count living neighbors
     for (let column = 0; column < columnCount; column++) {
       for (let row = 0; row < rowCount; row++) {
-        //? Coulum left of current cell
-        //? if column is at left edge, use modulus to wrap to right edge
+        //? Column left of current cell
+        //? If column is at left edge, use modulus to wrap to right edge
         let left = (column - 1 + columnCount) % columnCount;
 
-        //? column right of current cell
-        //? if column is at right edge, use moduls to wrap to left  edge
+        //? Column right of current cell
+        //? If column is at right edge, use modulus to wrap to left edge
         let right = (column + 1) % columnCount;
 
         //? Row above current cell
-        //? if row is at top edge, use modulus to wrap to bottem edge
+        //? If row is at top edge, use modulus to wrap to bottom edge
         let above = (row - 1 + rowCount) % rowCount;
 
         //? Row below current cell
-        //? if row is at vottem edge, use modulus to wrap to top edge
+        //? If row is at bottom edge, use modulus to wrap to top edge
         let below = (row + 1) % rowCount;
 
         //* Count living neighbours surrounding current cell
@@ -105,7 +107,7 @@ function game_of_life(p) {
       }
     }
 
-    //* Swaü the current and next array for next generration
+    //* Swap the current and next array for next generation
     let temp = currentCells;
     currentCells = nextCells;
     nextCells = temp;
@@ -114,7 +116,7 @@ function game_of_life(p) {
 
 new p5(game_of_life);
 
-//! MEIN TEST FALS WAS FALSCH LEUFT!!
+//! MY TEST IF SOMETHING IS WRONG!!
 //   p.setup = function () {
 //     p.createCanvas(800, 800);
 //     grid = new gritSquare(0, 0, 20, 20);

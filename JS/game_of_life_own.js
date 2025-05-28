@@ -3,127 +3,139 @@ let columnCount;
 let rowCount;
 let currentCells = [];
 let nextCells = [];
-let colors = ["#ff0000", "#00ff00", "#b494ea"]; // Rot, Grün, Lila
-let selectedColor = 0; // Standardfarbe: Rot
+let colors = ["#ff0000", "#ffff00", "#b494ea"]; // Red, Yellow, Purple
+let selectedColor = 0; // Default color: Red
 let runButton;
+let simulationRunning = false;
 
 function game_of_life(p) {
   p.setup = function () {
     p.frameRate(10);
-    p.createCanvas(800, 800); // Größeres Canvas (800x800)
+    p.createCanvas(800, 800);
 
     columnCount = p.floor(p.width / cellSize);
     rowCount = p.floor(p.height / cellSize);
 
     for (let column = 0; column < columnCount; column++) {
       currentCells[column] = [];
-    }
-
-    for (let column = 0; column < columnCount; column++) {
       nextCells[column] = [];
+      for (let row = 0; row < rowCount; row++) {
+        currentCells[column][row] = null;
+        nextCells[column][row] = null;
+      }
     }
 
-    // Setup des Run-Buttons
     runButton = p.createButton("Start Simulation");
-    runButton.position(p.width + 10, 50); // Button rechts vom Canvas platzieren
+    runButton.position(p.width + 10, 50);
     runButton.mousePressed(function () {
-      p.loop(); // Simulation starten
+      simulationRunning = true;
+      p.loop(); // Start the simulation
     });
 
-    // Tastenbelegung für Farbauswahl
+    p.noLoop();
+
+    // Keyboard input for color selection
     p.keyPressed = function () {
       if (p.key === "1") {
-        selectedColor = 0; // Rot
+        selectedColor = 0;
       } else if (p.key === "2") {
-        selectedColor = 1; // Grün
+        selectedColor = 1;
       } else if (p.key === "3") {
-        selectedColor = 2; // Lila
+        selectedColor = 2;
       }
     };
-
-    p.noLoop();
-    p.describe(
-      "Grid of squares where you can choose between 3 colors to place cells. Then, click 'Run' to start the simulation."
-    );
   };
 
   p.draw = function () {
-    p.background(255); // Hintergrund weiß, damit die Zellen sichtbar sind
+    p.background(255);
 
-    generate();
+    if (simulationRunning) {
+      generate();
+    }
+
     for (let column = 0; column < columnCount; column++) {
       for (let row = 0; row < rowCount; row++) {
         let cell = currentCells[column][row];
-        if (cell) {
-          p.fill(cell); // Zellen mit der gewählten Farbe
-        } else {
-          p.fill(255); // Leere Zellen (weiß)
-        }
+        p.fill(cell ? cell : 255);
         p.stroke(0);
         p.rect(column * cellSize, row * cellSize, cellSize, cellSize);
       }
     }
   };
 
-  // Zellen mit gewählter Farbe platzieren
   p.mousePressed = function () {
     let column = p.floor(p.mouseX / cellSize);
     let row = p.floor(p.mouseY / cellSize);
     if (column >= 0 && column < columnCount && row >= 0 && row < rowCount) {
-      currentCells[column][row] = colors[selectedColor]; // Zelle mit der gewählten Farbe setzen
+      if (p.keyIsDown(32)) {
+        // Spacebar + click → Reset
+        for (let c = 0; c < columnCount; c++) {
+          for (let r = 0; r < rowCount; r++) {
+            currentCells[c][r] = null;
+          }
+        }
+        simulationRunning = false;
+        p.noLoop();
+      } else if (!simulationRunning) {
+        // Normal cell placement
+        currentCells[column][row] = colors[selectedColor];
+        p.redraw(); // Update canvas
+      }
     }
-    p.loop();
   };
 
   function generate() {
     for (let column = 0; column < columnCount; column++) {
       for (let row = 0; row < rowCount; row++) {
-        let left = (column - 1 + columnCount) % columnCount;
-        let right = (column + 1) % columnCount;
-        let above = (row - 1 + rowCount) % rowCount;
-        let below = (row + 1) % rowCount;
+        let neighbors = getNeighbors(column, row);
+        let liveNeighbors = neighbors.filter((n) => n !== null);
+        let currentCell = currentCells[column][row];
 
-        let neighbors = [
-          currentCells[left][above],
-          currentCells[column][above],
-          currentCells[right][above],
-          currentCells[left][row],
-          currentCells[right][row],
-          currentCells[left][below],
-          currentCells[column][below],
-          currentCells[right][below],
-        ];
-
-        // Regeln: Wenn eine Farbe eine andere berührt, überlebt nur die dominierende Farbe
-        let dominantColor = getDominantColor(neighbors);
-
-        // Zelle wird mit der dominanten Farbe aus den Nachbarn gesetzt
-        if (dominantColor) {
-          nextCells[column][row] = dominantColor;
+        if (currentCell) {
+          // Survival only with 2 or 3 neighbors
+          nextCells[column][row] =
+            liveNeighbors.length === 2 || liveNeighbors.length === 3
+              ? currentCell
+              : null;
         } else {
-          nextCells[column][row] = currentCells[column][row];
+          // Birth with exactly 3 neighbors (with dominant color)
+          if (liveNeighbors.length === 3) {
+            nextCells[column][row] = getDominantColor(liveNeighbors);
+          } else {
+            nextCells[column][row] = null;
+          }
         }
       }
     }
 
+    // Swap grids
     let temp = currentCells;
     currentCells = nextCells;
     nextCells = temp;
   }
 
-  // Bestimmen der dominierenden Farbe basierend auf den Nachbarn
-  function getDominantColor(neighbors) {
-    let counts = { "#ff0000": 0, "#00ff00": 0, "#b494ea": 0 };
+  function getNeighbors(x, y) {
+    let neighbors = [];
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        if (dx === 0 && dy === 0) continue;
+        let nx = (x + dx + columnCount) % columnCount;
+        let ny = (y + dy + rowCount) % rowCount;
+        neighbors.push(currentCells[nx][ny]);
+      }
+    }
+    return neighbors;
+  }
 
-    neighbors.forEach((color) => {
-      if (color) counts[color]++;
+  function getDominantColor(cells) {
+    let counts = { "#ff0000": 0, "#ffff00": 0, "#b494ea": 0 };
+    cells.forEach((c) => {
+      if (c) counts[c]++;
     });
 
-    // Finde die dominierende Farbe (die mit den meisten Vorkommen)
-    let dominantColor = Object.keys(counts).reduce((a, b) =>
+    return Object.keys(counts).reduce((a, b) =>
       counts[a] > counts[b] ? a : b
     );
-    return dominantColor;
   }
 }
 

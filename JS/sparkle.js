@@ -8,7 +8,7 @@ function own_sketch2(p) {
         p.background(0, 0, 0, 2);
         for (let i = 0; i <= innerWidth; i+=10){
             p.stroke('#b494ea')
-            p.circle(p.random(p.width), p.random(p.height), 5)
+            p.circle(p.random(p.width), p.random(p.height), 1)
         }
     };
 }
