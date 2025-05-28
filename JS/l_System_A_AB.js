@@ -30,10 +30,12 @@ function l_system(p) {
     currentString = axiom;
     stringsByGen = [axiom];
 
+    // Generate strings for each generation based on rules
     for (let i = 0; i < generations; i++) {
       let nextString = "";
       let current = stringsByGen[i];
 
+      // For each character in the current string, apply the rule if exists
       for (let j = 0; j < current.length; j++) {
         let currentChar = current.charAt(j);
         if (rule[currentChar]) {
@@ -49,9 +51,11 @@ function l_system(p) {
 
   function drawEachGeneration() {
     p.background(255);
+
+    // Draw each generation shifted down vertically
     for (let i = 0; i <= generations; i++) {
       p.push();
-      p.translate(p.width / 2, 50 + i * 80); // Jede Generation wandert weiter nach unten
+      p.translate(p.width / 2, 50 + i * 80); // Each generation moves further down
       drawLSystem(stringsByGen[i]);
       p.pop();
     }
@@ -62,16 +66,16 @@ function l_system(p) {
     for (let i = 0; i < instruction.length; i++) {
       let currentChar = instruction.charAt(i);
       if (currentChar === "F") {
-        p.line(0, 0, 0, len);
-        p.translate(0, len);
+        p.line(0, 0, 0, len); // Draw forward line
+        p.translate(0, len); // Move forward
       } else if (currentChar === "+") {
-        p.rotate(ang);
+        p.rotate(ang); // Rotate right by angle
       } else if (currentChar === "-") {
-        p.rotate(-ang);
+        p.rotate(-ang); // Rotate left by angle
       } else if (currentChar === "[") {
-        p.push();
+        p.push(); // Save current drawing state
       } else if (currentChar === "]") {
-        p.pop();
+        p.pop(); // Restore previous drawing state
       }
     }
   }

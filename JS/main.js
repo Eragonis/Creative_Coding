@@ -38,7 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
       targetUrl = event.target.getAttribute("data-url");
-      modal.style.display = "flex";
+      if (targetUrl === "game_of_life_own.html") {
+        modal.style.display = "flex";
+      } else {
+        window.location.href = targetUrl;
+      }
     });
   });
 

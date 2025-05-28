@@ -148,3 +148,7 @@ new p5(sketch_image);
 }
 
 ```
+
+## Netlify Status Badge
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cae83ece-902e-4dbc-a1a9-1b11b2a259aa/deploy-status)](https://app.netlify.com/projects/eragonis-cc/deploys)
