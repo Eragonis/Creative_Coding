@@ -1,5 +1,4 @@
 function ping_Pong_test(p) {
-  // Paddle properties
   let paddleLeftX = 20;
   let paddleLeftY = 200;
 
@@ -10,11 +9,9 @@ function ping_Pong_test(p) {
   let paddleHeight = 80;
   let paddleWidth = 10;
 
-  // Scores
   let leftScore = 0;
   let rightScore = 0;
 
-  // Ball properties
   let ballPosX = 200;
   let ballPosY = 200;
   let ballSpeedX = 0;
@@ -22,12 +19,14 @@ function ping_Pong_test(p) {
   let ballSize = 10;
 
   p.setup = function () {
-    p.createCanvas(400, 400);
+    p.createCanvas(400, 400); // p. beachten
+
     p.rectMode(p.CENTER);
     p.fill(255);
     p.noStroke();
     p.textSize(40);
     p.textAlign(p.CENTER);
+
     p.noLoop();
     p.describe(
       'Two narrow white rectangles and a white square representing the paddles and ball in a game of ping pong. The player scores are displayed in the upper corners, and initially text reads "Click to start"'
@@ -37,22 +36,22 @@ function ping_Pong_test(p) {
   p.draw = function () {
     p.background(0);
 
-    // Draw paddles
+    // Paddles zeichnen
     p.rect(paddleLeftX, paddleLeftY, paddleWidth, paddleHeight);
     p.rect(paddleRightX, paddleRightY, paddleWidth, paddleHeight);
 
-    // Draw ball
+    // Ball zeichnen
     p.square(ballPosX, ballPosY, ballSize);
 
-    // Display scores
+    // Punktestand anzeigen
     p.text(leftScore, p.width * 0.25, p.height * 0.1);
     p.text(rightScore, p.width * 0.75, p.height * 0.1);
 
-    // Move ball
+    // Ball bewegen
     ballPosX += ballSpeedX;
     ballPosY += ballSpeedY;
 
-    // Collision with left paddle
+    // Kollision linkes Paddle
     let leftCollisionLeft = paddleLeftX - paddleWidth / 2 - ballSize / 2;
     let leftCollisionRight = paddleLeftX + paddleWidth / 2 + ballSize / 2;
     let leftCollisionTop = paddleLeftY - paddleHeight / 2 - ballSize / 2;
@@ -68,7 +67,7 @@ function ping_Pong_test(p) {
       ballSpeedY = (ballPosY - paddleLeftY) / 5;
     }
 
-    // Collision with right paddle
+    // Kollision rechtes Paddle
     let rightCollisionLeft = paddleRightX - paddleWidth / 2 - ballSize / 2;
     let rightCollisionRight = paddleRightX + paddleWidth / 2 + ballSize / 2;
     let rightCollisionTop = paddleRightY - paddleHeight / 2 - ballSize / 2;
@@ -84,33 +83,31 @@ function ping_Pong_test(p) {
       ballSpeedY = (ballPosY - paddleRightY) / 5;
     }
 
-    // Score update and reset ball
+    // Punkte & Ball zurücksetzen
     if (ballPosX < 0) {
       rightScore++;
       p.resetBall();
-      p.noLoop();
     } else if (ballPosX > p.width) {
       leftScore++;
       p.resetBall();
-      p.noLoop();
     }
 
-    // Ball bounces off top and bottom walls
+    // Wände oben & unten
     if (ballPosY < 0 || ballPosY > p.height) {
       ballSpeedY = -ballSpeedY;
     }
 
-    // Left paddle control (W and S keys)
+    // Steuerung linkes Paddle (W & S)
     let leftMove = 0;
-    if (p.keyIsDown(87)) leftMove -= paddleSpeed; // W
-    if (p.keyIsDown(83)) leftMove += paddleSpeed; // S
+    if (p.keyIsDown(87)) leftMove -= paddleSpeed;
+    if (p.keyIsDown(83)) leftMove += paddleSpeed;
     paddleLeftY = p.constrain(
       paddleLeftY + leftMove,
       paddleHeight / 2,
       p.height - paddleHeight / 2
     );
 
-    // Right paddle control (UP and DOWN arrows)
+    // Steuerung rechtes Paddle (Pfeiltasten)
     let rightMove = 0;
     if (p.keyIsDown(p.UP_ARROW)) rightMove -= paddleSpeed;
     if (p.keyIsDown(p.DOWN_ARROW)) rightMove += paddleSpeed;
@@ -120,14 +117,13 @@ function ping_Pong_test(p) {
       p.height - paddleHeight / 2
     );
 
-    // Show "Click to start" if game paused
+    // Text bei Pausierung
     if (!p.isLooping()) {
-      p.fill(255);
       p.text("Click to start", p.width / 2, p.height / 2 - 20);
     }
   };
 
-  // Reset ball position and speed
+  // Ball zurücksetzen
   p.resetBall = function () {
     ballPosX = p.width / 2;
     ballPosY = p.height / 2;
@@ -135,7 +131,7 @@ function ping_Pong_test(p) {
     ballSpeedY = p.random([-2, 2]);
   };
 
-  // Start the game on mouse press
+  // Spiel starten durch Mausklick
   p.mousePressed = function () {
     if (!p.isLooping()) {
       p.resetBall();

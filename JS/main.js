@@ -38,17 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
       targetUrl = event.target.getAttribute("data-url");
-      if (targetUrl === "game_of_life_own.html") {
-        modal.style.display = "flex";
-      } else {
-        window.location.href = targetUrl;
-      }
+      // modal.style.display = "flex";
+      window.location.href = targetUrl;
     });
   });
 
   yesButton.addEventListener("click", () => {
     if (targetUrl) {
-      window.location.href = targetUrl;
+      // window.location.href = targetUrl;
     }
   });
 
