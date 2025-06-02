@@ -3,6 +3,7 @@
 ## Anleitung
 
 - Clonen sie das Repo
+  - [clone](https://github.com/Eragonis/Creative_Coding)
 - Öffnen sie es in VSCode
 - Instalieren sie Live Server oder Live Server (Five Server)
 - Klicken sie unten rechs auf go Live (je nach dem welcher Server sie haben)
@@ -12,7 +13,7 @@
   - und dann auf index.html
 - Nun sehen sie das komplete Projekt
 - wenn sie eine seite öffnen Können sie übers Bild zurück zur index seite.
-  [Github](https://github.com/Eragonis/Creative_Coding)
+- [Github Eragonis](https://github.com/Eragonis/Creative_Coding)
 
 ---
 
