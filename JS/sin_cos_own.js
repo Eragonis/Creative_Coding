@@ -110,19 +110,26 @@ function sketch_sin_cos(p) {
       startY + lineHeight
     );
 
-    p.fill("lime");
+    p.fill("red");
     p.text(
-      `P: (${cosX.toFixed(1)}, ${sinY.toFixed(1)})`,
+      `S: (${circleX.toFixed(1)}, ${sinY.toFixed(1)})`,
       startX + 20,
       startY + 2 * lineHeight
     );
 
+    p.fill("lime");
+    p.text(
+      `P: (${cosX.toFixed(1)}, ${sinY.toFixed(1)})`,
+      startX + 20,
+      startY + 3 * lineHeight
+    );
+
     p.fill("#b494ea");
-    p.text(`A: ${area.toFixed(2)} px²`, startX + 20, startY + 3 * lineHeight);
+    p.text(`A: ${area.toFixed(2)} px²`, startX + 20, startY + 4 * lineHeight);
     p.text(
       `A: ${areaInCm2.toFixed(4)} cm²`,
       startX + 20,
-      startY + 4 * lineHeight
+      startY + 5 * lineHeight
     );
 
     // --- Draw sine and cosine graph below the circle ---
