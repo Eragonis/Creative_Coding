@@ -3,10 +3,11 @@ let columnCount;
 let rowCount;
 let currentCells = [];
 let nextCells = [];
-let colors = ["#ff0000", "#ffff00", "#b494ea"]; // Red, Yellow, Purple
-let selectedColor = 0; // Default color: Red
+let colors = ["#ff0000", "#ffff00", "#b494ea"]; // Rot, Gelb, Lila
+let selectedColor = 0; // Standardfarbe: Rot
 let runButton;
 let simulationRunning = false;
+let spacePressed = false; // innerhalb der Instanz verwalten!
 
 function game_of_life(p) {
   p.setup = function () {
@@ -29,21 +30,22 @@ function game_of_life(p) {
     runButton.position(p.width + 10, 50);
     runButton.mousePressed(function () {
       simulationRunning = true;
-      p.loop(); // Start the simulation
+      p.loop(); // Simulation starten
     });
 
     p.noLoop();
+  };
 
-    // Keyboard input for color selection
-    p.keyPressed = function () {
-      if (p.key === "1") {
-        selectedColor = 0;
-      } else if (p.key === "2") {
-        selectedColor = 1;
-      } else if (p.key === "3") {
-        selectedColor = 2;
-      }
-    };
+  // 🎯 Tasteneingaben innerhalb der Instanz
+  p.keyPressed = function () {
+    if (p.key === "1") selectedColor = 0;
+    else if (p.key === "2") selectedColor = 1;
+    else if (p.key === "3") selectedColor = 2;
+    else if (p.keyCode === 32) spacePressed = true; // Leertaste gedrückt
+  };
+
+  p.keyReleased = function () {
+    if (p.keyCode === 32) spacePressed = false; // Leertaste losgelassen
   };
 
   p.draw = function () {
@@ -66,21 +68,31 @@ function game_of_life(p) {
   p.mousePressed = function () {
     let column = p.floor(p.mouseX / cellSize);
     let row = p.floor(p.mouseY / cellSize);
-    if (column >= 0 && column < columnCount && row >= 0 && row < rowCount) {
-      if (p.keyIsDown(32)) {
-        // Spacebar + click → Reset
-        for (let c = 0; c < columnCount; c++) {
-          for (let r = 0; r < rowCount; r++) {
-            currentCells[c][r] = null;
-          }
+
+    if (spacePressed && p.mouseButton === p.LEFT) {
+      // 🧹 Reset bei Klick + Space
+      for (let c = 0; c < columnCount; c++) {
+        for (let r = 0; r < rowCount; r++) {
+          currentCells[c][r] = null;
+          nextCells[c][r] = null;
         }
-        simulationRunning = false;
-        p.noLoop();
-      } else if (!simulationRunning) {
-        // Normal cell placement
-        currentCells[column][row] = colors[selectedColor];
-        p.redraw(); // Update canvas
       }
+      simulationRunning = false;
+      p.noLoop();
+      p.redraw();
+      return;
+    }
+
+    // Zellplatzierung nur wenn keine Simulation läuft
+    if (
+      !simulationRunning &&
+      column >= 0 &&
+      column < columnCount &&
+      row >= 0 &&
+      row < rowCount
+    ) {
+      currentCells[column][row] = colors[selectedColor];
+      p.redraw();
     }
   };
 
@@ -92,13 +104,11 @@ function game_of_life(p) {
         let currentCell = currentCells[column][row];
 
         if (currentCell) {
-          // Survival only with 2 or 3 neighbors
           nextCells[column][row] =
             liveNeighbors.length === 2 || liveNeighbors.length === 3
               ? currentCell
               : null;
         } else {
-          // Birth with exactly 3 neighbors (with dominant color)
           if (liveNeighbors.length === 3) {
             nextCells[column][row] = getDominantColor(liveNeighbors);
           } else {
@@ -108,7 +118,6 @@ function game_of_life(p) {
       }
     }
 
-    // Swap grids
     let temp = currentCells;
     currentCells = nextCells;
     nextCells = temp;
