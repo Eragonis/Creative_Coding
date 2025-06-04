@@ -109,7 +109,7 @@ let snakeSketch = (p) => {
 
     if (head.x === food.x && head.y === food.y) {
       //   score++;
-      score += 5;
+      score += 10;
       updateScore();
       generateFood();
     } else {
@@ -139,6 +139,20 @@ let snakeSketch = (p) => {
       }
       if (score === 1000) {
         text += " — Mato Seihei no Slave";
+      }
+      if (score === 2000) {
+        text += " — 好き好き大好き結婚しようマイハニー";
+      }
+      if (score === 5000) {
+        text +=
+          " — 「あなたは私の友達だから、私はいつもあなたを救うためにそこにいます。」 – アカメ";
+      }
+      if (score === 10000) {
+        text +=
+          " — 「『俺は人間だ、本物だ、骨の髄まで本物だ。 私をクソモンスターと一緒にしないでください。 -ガッツ";
+      }
+      if (score === 20000) {
+        text += " — 急いでいる場合は迂回してください";
       }
     }
     scoreDiv.html(text);
