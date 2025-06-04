@@ -19,12 +19,13 @@ let snakeSketch = (p) => {
   p.setup = () => {
     // Score Div oben über Canvas, rechtsbündig
     scoreDiv = p.createDiv("");
-    scoreDiv.style("font-size", "20px");
+    scoreDiv.style("font-size", "15px");
     scoreDiv.style("font-family", "Arial, sans-serif");
     scoreDiv.style("margin-bottom", "0px");
     scoreDiv.style("color", "#b494ea");
     scoreDiv.style("text-align", "right");
     scoreDiv.style("width", p.width + "px");
+    scoreDiv.style("white-space", "pre-line"); // Wichtig für Zeilenumbrüche
 
     // Easter Egg Div unter Score, rechtsbündig mit Abstand
     easterEggDiv = p.createDiv("");
@@ -73,6 +74,7 @@ let snakeSketch = (p) => {
   };
 
   function resetGame() {
+    // Initialer Zustand der Schlange
     snake = [
       { x: 200, y: 200 },
       { x: 190, y: 200 },
@@ -108,7 +110,7 @@ let snakeSketch = (p) => {
     snake.unshift(head);
 
     if (head.x === food.x && head.y === food.y) {
-      //   score++;
+      // Punkte erhöhen
       score += 10;
       updateScore();
       generateFood();
@@ -120,45 +122,43 @@ let snakeSketch = (p) => {
   }
 
   function hasGameEnded() {
+    // Prüfen ob sich Schlange selbst trifft
     for (let i = 4; i < snake.length; i++) {
       if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
     }
 
     const head = snake[0];
+    // Prüfen ob Wand getroffen
     return head.x < 0 || head.x >= p.width || head.y < 0 || head.y >= p.height;
   }
 
   function updateScore() {
-    let text = "";
-    if (score === 100) {
-      text = "The Hundred-Man Slaughterer";
-    } else {
-      text = "Score: " + score;
-      if (score > 500) {
-        text += " 𒉭";
-      }
-      if (score === 1000) {
-        text += " — Mato Seihei no Slave";
-      }
-      if (score === 2000) {
-        text += " — 好き好き大好き結婚しようマイハニー";
-      }
-      if (score === 5000) {
-        text +=
-          " — 「あなたは私の友達だから、私はいつもあなたを救うためにそこにいます。」 – アカメ";
-      }
-      if (score === 10000) {
-        text +=
-          " — 「『俺は人間だ、本物だ、骨の髄まで本物だ。 私をクソモンスターと一緒にしないでください。 -ガッツ";
-      }
-      if (score === 20000) {
-        text += " — 急いでいる場合は迂回してください";
-      }
+    // Standardanzeige
+    let text = `Score: ${score}`;
+    if (score > 500) text += " 𒉭";
+
+    // Zusätzliche Texte bei bestimmten Punkteständen (mit Zeilenumbrüchen)
+    if (score === 1000) {
+      text += `<br> Mato Seihei no Slave`;
     }
+    if (score === 2000) {
+      text += `<br> 好<br>き<br>好<br>き<br>大<br>好<br>き<br>結<br>婚<br>し<br>よ<br>う<br>マ<br>イ<br>ハ<br>ニ<br>ー`;
+    }
+    if (score === 5000) {
+      text += `<br> あ<br>な<br>た<br>は<br>私<br>の<br>友<br>達<br>だ<br>か<br>ら<br>、<br>私<br>は<br>い<br>つ<br>も<br>あ<br>な<br>た<br>を<br>救<br>う<br>た<br>め<br>に<br>そ<br>こ<br>に<br>い<br>ま<br>す<br>。<br> ア<br>カ<br>メ`;
+    }
+    if (score === 10000) {
+      text += `<br> 俺<br>は<br>人<br>間<br>だ<br>、<br>本<br>物<br>だ<br>、骨<br>の<br>髄<br>ま<br>で<br>本<br>物<br>だ<br>。<br>私<br>を<br>ク<br>ソ<br>モ<br>ン<br>ス<br>タ<br>と<br>緒<br>に<br>し<br>な<br>い<br>で<br>く<br>だ<br>さ<br>い<br>。<br> ガ<br>ッ<br>ツ`;
+    }
+    if (score === 20000) {
+      text += `<br> 急<br>い<br>で<br>い<br>る<br>場<br>合<br>は<br>迂<br>回<br>し<br>て<br>く<br>だ<br>さ<br>い`;
+    }
+
     scoreDiv.html(text);
 
+    // Easter Egg bei sehr hohem Score
     if (score >= 25000) {
-      easterEggDiv.html("出雲 天花\n21 years old\n1.63cm tall\n😏 88 cm (F)");
+      easterEggDiv.html("出雲 天花<br>21 years old<br>1.63cm tall<br>😏 88 cm (F)");
     } else {
       easterEggDiv.html("");
     }
@@ -167,7 +167,6 @@ let snakeSketch = (p) => {
   function generateFood() {
     // Immer Abstand vom Rand, hier 20px = 2 Zellen
     let margin = 20;
-
     let cols = (p.width - margin * 2) / 10;
     let rows = (p.height - margin * 2) / 10;
 
@@ -191,6 +190,7 @@ let snakeSketch = (p) => {
       UP = 38,
       DOWN = 40;
 
+    // Richtungsänderung
     if (p.keyCode === LEFT && dx !== 10) {
       dx = -10;
       dy = 0;
@@ -214,6 +214,7 @@ let snakeSketch = (p) => {
       return;
     }
 
+    // Spiel neustarten wenn Game Over + Leertaste gedrückt
     if (gameOver && p.mouseButton === p.LEFT && p.keyIsDown(32)) {
       resetGame();
       gameOver = false;
