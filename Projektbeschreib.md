@@ -1,6 +1,6 @@
-# Sinus Cosinus mit Fläche
+# <span style="color:#78346b">Sinus Cosinus mit Fläche</span>
 
-## Was macht das Projekt
+## <span style="color:#b4cbff">Was macht das Projekt</span>
 
 - Es wird ein kreis angezeigt mit 4 Punkten:
   - <span style="color:#ffffff">M</span> Position vom mitelpunkt.
@@ -12,7 +12,7 @@
 
 ---
 
-## Code
+## <span style="color:#b47bff">Code</span>
 
 - Einen Einheitskreis (mit Radius 75 Pixel).
 - Den aktuellen Winkel (0–359 Grad, wechselt jede Sekunde).
@@ -23,7 +23,7 @@
 - Eine laufende Linie, die den aktuellen Winkel auch in den Kurven zeigt.
 - Die Fläche des Dreiecks M–C–P (als Pixel² und cm²).
 
-### Nun Genauer
+### <span style="color:#9b2fff">Nun Genauer</span>
 
 - Über P5js wird zuerst die ganzen variabel angegeben:
   ```
@@ -43,18 +43,18 @@
 
 ---
 
-## Fazit
+## <span style="color:#22a7f2">Fazit</span>
 
 - Es hört sich sehr einfach an, aber so einfach ist es nicht.
   - Mit hilfe von Tutorials ist es aber sehr gut machbar
 
 ---
 
-# Englisch
+# <span style="color:#00ff00">Englisch</span>
 
-# Sine Cosine with Area
+# <span style="color:#78346b">Sine Cosine with Area</span>
 
-## What does the project do?
+## <span style="color:#b4cbff">What does the project do?</span>
 
 - A circle is displayed with 4 points:
 - <span style="color:#ffffff">M</span> Position of the center.
@@ -66,7 +66,7 @@
 
 ---
 
-## Code
+## <span style="color:#b47bff">Code</span>
 
 - A unit circle (with a radius of 75 pixels).
 - The current angle (0–359 degrees, changes every second).
@@ -77,7 +77,7 @@
 - A running line that also shows the current angle in the curves.
 - The area of ​​the triangle M–C–P (as pixels² and cm²).
 
-### Now in more detail
+### <span style="color:#9b2fff">Now in more detail</span>
 
 - The entire variable is first specified via P5js:
 
@@ -99,7 +99,7 @@ let
 
 ---
 
-## Conclusion
+## <span style="color:#22a7f2">Conclusion</span>
 
 - It sounds very simple, but it's not that easy.
 - With the help of tutorials, however, it's very doable.
