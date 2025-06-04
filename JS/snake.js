@@ -36,7 +36,7 @@ let snakeSketch = (p) => {
     easterEggDiv.style("text-align", "right");
     easterEggDiv.style("width", p.width + "px");
 
-    p.createCanvas(400, 400);
+    p.createCanvas(640, 656);
     p.frameRate(10);
     resetGame();
   };
@@ -108,7 +108,8 @@ let snakeSketch = (p) => {
     snake.unshift(head);
 
     if (head.x === food.x && head.y === food.y) {
-      score++;
+      //   score++;
+      score += 10;
       updateScore();
       generateFood();
     } else {
