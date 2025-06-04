@@ -109,7 +109,7 @@ let snakeSketch = (p) => {
 
     if (head.x === food.x && head.y === food.y) {
       //   score++;
-      score += 10;
+      score += 5;
       updateScore();
       generateFood();
     } else {
@@ -143,7 +143,7 @@ let snakeSketch = (p) => {
     }
     scoreDiv.html(text);
 
-    if (score >= 1500) {
+    if (score >= 25000) {
       easterEggDiv.html("出雲 天花\n21 years old\n1.63cm tall\n😏 88 cm (F)");
     } else {
       easterEggDiv.html("");
