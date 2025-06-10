@@ -135,6 +135,9 @@ let snakeSketch = (p) => {
   function updateScore() {
     // Standardanzeige
     let text = `Score: ${score}`;
+    if (score === 100) {
+      text = "The Hundred-Man Slaughterer";
+    }
     if (score > 500) text += " 𒉭";
 
     // Zusätzliche Texte bei bestimmten Punkteständen (mit Zeilenumbrüchen)
@@ -158,7 +161,9 @@ let snakeSketch = (p) => {
 
     // Easter Egg bei sehr hohem Score
     if (score >= 25000) {
-      easterEggDiv.html("出雲 天花<br>21 years old<br>1.63cm tall<br>😏 88 cm (F)");
+      easterEggDiv.html(
+        "出雲 天花<br>21 years old<br>1.63cm tall<br>😏 88 cm (F)"
+      );
     } else {
       easterEggDiv.html("");
     }
