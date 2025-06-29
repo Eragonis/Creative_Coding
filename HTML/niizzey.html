@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niizzey</title>
+    <link rel="shortcut icon" href="/Image/Guts_smil_normal.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/stylesheet.css">
+    <script src="../libraries/p5.min.js"></script>
+    <script src="../libraries/p5.sound.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <button id="darkModeToggle"><strong>Dark Mode</strong></button> <br />
+        <h1>Niizzey</h1>
+        <p>This is the part for the streamer Niizzey</p>
+        <p>This page is a test page for Niizzey in the current state. <br>If you are interested in getting to know
+            Niizzey, <br>
+            look here on Twitch <a href="https://www.twitch.tv/niizzey"><img
+                    src="https://cdn-icons-png.flaticon.com/512/5968/5968819.png" alt="twitch" width="20"
+                    height="20"></a>, or on Instagram <a
+                href="https://www.instagram.com/niiizzey/?locale=de&hl=am-et"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/500px-Instagram-Icon.png"
+                    alt="instagram" width="20" height="20"></a>, or Tik Tok <a
+                href="https://www.tiktok.com/@niizzeyplayz"><img
+                    src="https://static.vecteezy.com/system/resources/previews/016/716/450/non_2x/tiktok-icon-free-png.png"
+                    alt="twitch" width="20" height="20"></a><br>
+
+
+            <audio id="audioPlayer">
+                <source src="../Image/Sound/troll.mp4" type="audio/mp4">
+                Your browser does not support the audio element.
+            </audio>
+
+            <a href="javascript:void(0)" onclick="playAudio()"><img
+                    src="https://avatars.githubusercontent.com/u/150899018?s=400&u=d7b30886102307894602862432f7577c06699430&v=4"
+                    alt="Niizzey" width="50" height="50"></a>
+            <br>
+            <a href="index.html"><img
+                    src="https://raw.githubusercontent.com/Eragonis/JS_Project_EMVs_New/refs/heads/main/Image/Home/home.png"
+                    alt="home" width="50" height="50" /></a>
+
+
+
+
+            <script>
+                function playAudio() {
+                    const audio = document.getElementById("audioPlayer");
+                    audio.currentTime = 0;
+                    audio.play().catch(err => {
+                        console.error("Audio konnte nicht abgespielt werden:", err);
+                    });
+                }
+            </script>
+
+
+
+            <script src="../JS/main.js"></script>
+            <script src="../JS/sketch_niizzey_pixel.js"></script>
+
+
+</body>
+
+</html>
