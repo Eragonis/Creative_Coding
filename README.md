@@ -104,35 +104,83 @@ new p5(sketch_image);
 
 ```
 {
+  "todohighlight.isCaseSensitive": true,
+  "todohighlight.keywords": [
+    {
+      "text": "VIDEO",
+      "color": "#333",
+      "backgroundColor": "#3498db"
+    },
+    {
+      "text": "FIXME",
+      "color": "#333",
+      "backgroundColor": "#e67e22"
+    },
+    {
+      "text": "LEC",
+      "color": "#333",
+      "backgroundColor": "#f1c40f"
+    },
+    {
+      "text": "BUG",
+      "color": "#333",
+      "backgroundColor": "#e74c3c"
+    },
+    {
+      "text": "TODO",
+      "color": "#333",
+      "backgroundColor": "#2ecc71"
+    }
+  ],
+  "editor.linkedEditing": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  "telemetry.telemetryLevel": "off",
-  "extensions.autoCheckUpdates": false,
-  "extensions.autoUpdate": false,
-  "update.mode": "none",
-  "update.showReleaseNotes": false,
-  "git.optimisticUpdate": false,
-  "doki.statusbar.name": "夜刀神 十香",
+
+  // Those are used for the explorer intendation and colors
   "workbench.tree.indent": 15,
   "workbench.colorCustomizations": {
     "tree.indentGuidesStroke": "#b494ea"
   },
-  "editor.cursorBlinking": "smooth",
-  "terminal.integrated.cursorStyle": "line",
-  "editor.rulers": [80],
+  "workbench.tree.renderIndentGuides": "always",
+
+  // last line
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  "explorer.autoReveal": "focusNoScroll",
-  "editor.stickyScroll.enabled": false,
+
+  //   Terminal
+  "terminal.integrated.cursorStyle": "line",
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "cSpell.enabled": false,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "cSpell.overrides": [],
+  "cSpell.customDictionaries": {},
+  "cSpell.patterns": [],
+  "workbench.colorTheme": "dfd05a73-c189-4622-87c7-573fbb3a46b9",
+  "doki.statusbar.name": "夜刀神十香",
+  "doki.sticker.css": "z-index:100;background-position:97% 96%",
   "github.copilot.enable": {
     "*": false,
     "plaintext": false,
     "markdown": false,
-    "scminput": false
+    "scminput": false,
+    "html": true
   },
   "files.autoSave": "afterDelay",
+  "doki.background.path": "C:\\Users\\stark\\OneDrive\\Bilder\\akame_swimm.webp",
+  "doki.sticker.path": "/media/degi/T7/image/tohka_sticker_2.png",
+  // "doki.sticker.path": "C:\\Users\\stark\\OneDrive\\Bilder\tohka_sticker_2.png",
+  "doki.wallpaper.path": "C:\\Users\\stark\\OneDrive\\Desktop\\BFO\\Script\\src\\kurumi.jpg",
+
+  "workbench.iconTheme": "material-icon-theme",
+  "remote.defaultExtensionsIfInstalledLocally": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "GitHub.vscode-pull-request-github"
+  ],
 
   // changing the comment color
   "editor.tokenColorCustomizations": {
@@ -144,7 +192,13 @@ new p5(sketch_image);
         }
       }
     ]
-  }
+  },
+  "doki.wallpaper.enabled": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "editor.pasteAs.preferences": [
+
+  ]
 }
 
 ```
